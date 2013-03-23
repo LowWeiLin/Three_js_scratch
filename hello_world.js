@@ -5,6 +5,7 @@
     var geometry, material;
 	var mesh = new Array();
 	var numcubes = 8;
+	var cubesize = 200;
 
     init();
     animate();
@@ -26,7 +27,7 @@
 		
 		//
 
-        geometry = new THREE.CubeGeometry( 200, 200, 200 );
+        geometry = new THREE.CubeGeometry( cubesize, cubesize, cubesize );
         material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
 
 
@@ -65,8 +66,8 @@
 			mesh[i].position.y = 500*Math.cos(2*Math.PI*(i/numcubes));
 			*/
 			mesh[i].rotation.z = 2*Math.PI*(i/numcubes)-move;
-			mesh[i].position.x = 500*Math.sin(2*Math.PI*(i/numcubes)+move);
-			mesh[i].position.y = 500*Math.cos(2*Math.PI*(i/numcubes)+move);
+			mesh[i].position.x = (cubesize/2)/Math.tan(numcubes/(4*Math.PI)+(move%100))*Math.sin(2*Math.PI*(i/numcubes)+move);
+			mesh[i].position.y = (cubesize/2)/Math.tan(numcubes/(4*Math.PI)+(move%100))*Math.cos(2*Math.PI*(i/numcubes)+move);
 			
 			
 			

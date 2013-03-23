@@ -2,7 +2,9 @@
 
 
     var camera, scene, renderer;
-    var geometry, material, mesh;
+    var geometry, material;
+	var mesh = new Array();
+	var numcubes = 8;
 
     init();
     animate();
@@ -27,9 +29,11 @@
         geometry = new THREE.CubeGeometry( 200, 200, 200 );
         material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
 
-        mesh = new THREE.Mesh( geometry, material );
-        scene.add( mesh );
-		
+
+		for( var i=0 ; i<numcubes ; i++ ){
+        	mesh[i] = new THREE.Mesh( geometry, material );
+        	scene.add( mesh[i] );
+		}
 		//
 
         renderer = new THREE.WebGLRenderer();
@@ -49,12 +53,26 @@
         // note: three.js includes requestAnimationFrame shim
         requestAnimationFrame( animate );
 		renderer.autoClear = false;
-        mesh.rotation.x += 0.01;
-        mesh.rotation.y += 0.02;
+        //mesh.rotation.x += 0.01;
+        //mesh.rotation.y += 0.02;
 		
-		mesh.position.x = 500*Math.sin(move);
-		mesh.position.y = 200*Math.cos(move);
+		
+		
+		for(var	 i=0 ; i<numcubes ; i++ ){
+			/*
+			mesh[i].rotation.z = (2*Math.PI*((i)/numcubes)+move)%(2*Math.PI);
+			mesh[i].position.x = 500*Math.sin(2*Math.PI*(i/numcubes));
+			mesh[i].position.y = 500*Math.cos(2*Math.PI*(i/numcubes));
+			*/
+			mesh[i].rotation.z = 2*Math.PI*(i/numcubes)-move;
+			mesh[i].position.x = 500*Math.sin(2*Math.PI*(i/numcubes)+move);
+			mesh[i].position.y = 500*Math.cos(2*Math.PI*(i/numcubes)+move);
+			
+			
+			
+		}
 		move+=0.01;
+
 		//mesh.scale = 0.5;
 		
 		//mesh.translateX(100+Math.random()*100-50);
@@ -64,6 +82,6 @@
         
 		
 		renderer.render( scene, camera );
-		renderer.render( scene, camera2 );
+		//renderer.render( scene, camera2 );
 		
     }

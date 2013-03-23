@@ -4,7 +4,7 @@
     var camera, scene, renderer;
     var geometry, material;
 	var mesh = new Array();
-	var numcubes = 8;
+	var numcubes = 7;
 	var cubesize = 200;
 
     init();
@@ -58,22 +58,22 @@
         //mesh.rotation.y += 0.02;
 		
 		
-		
 		for(var	 i=0 ; i<numcubes ; i++ ){
 			/*
 			mesh[i].rotation.z = (2*Math.PI*((i)/numcubes)+move)%(2*Math.PI);
 			mesh[i].position.x = 500*Math.sin(2*Math.PI*(i/numcubes));
 			mesh[i].position.y = 500*Math.cos(2*Math.PI*(i/numcubes));
 			*/
-			mesh[i].rotation.z = 2*Math.PI*(i/numcubes)-move;
-			mesh[i].position.x = (cubesize/2)/Math.tan(numcubes/(4*Math.PI)+(move%100))*Math.sin(2*Math.PI*(i/numcubes)+move);
-			mesh[i].position.y = (cubesize/2)/Math.tan(numcubes/(4*Math.PI)+(move%100))*Math.cos(2*Math.PI*(i/numcubes)+move);
+			mesh[i].rotation.z = ((2*Math.PI/numcubes)*(numcubes-i))-move;
+			mesh[i].position.x = (((cubesize/2)/Math.tan((2*Math.PI)/numcubes/2))+(cubesize/2))*Math.sin(2*Math.PI*(i/numcubes)+move);
+			mesh[i].position.y = (((cubesize/2)/Math.tan((2*Math.PI)/numcubes/2))+(cubesize/2))*Math.cos(2*Math.PI*(i/numcubes)+move);
+			
 			
 			
 			
 		}
+		
 		move+=0.01;
-
 		//mesh.scale = 0.5;
 		
 		//mesh.translateX(100+Math.random()*100-50);
